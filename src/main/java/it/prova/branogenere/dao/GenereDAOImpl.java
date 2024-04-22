@@ -1,9 +1,13 @@
 package it.prova.branogenere.dao;
 
 import java.util.List;
+import java.util.Set;
 
+import it.prova.branogenere.model.Brano;
 import it.prova.branogenere.model.Genere;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.Query;
 
 public class GenereDAOImpl implements GenereDAO {
@@ -108,4 +112,49 @@ public class GenereDAOImpl implements GenereDAO {
 		this.entityManager = entityManager;
 	}
 
+	@Override
+	public void deleteBranoGenereAssociazione(Genere genere) throws Exception {
+		entityManager = EntityManagerUtil.getEntityManager();
+		try {
+			if (genere == null ) {
+				throw new Exception("Errore valore input");
+			}
+			entityManager.getTransaction().begin();
+			Query query = entityManager.createNativeQuery(
+					"DELETE FROM  brano_genere WHERE  id_genere = :idGenere AND id_brano =  :idBrano");
+			for (Brano brano : genere.getBrani()) {
+				query.setParameter("idGenere", genere.getId());
+				query.setParameter("id_brano", brano.getId());
+				query.executeUpdate();
+			}
+			entityManager.getTransaction().commit();
+
+		} finally {
+			if (entityManager != null) {
+				entityManager.close();
+			}
+		}
+
+	}
+
+	@Override
+	public Genere getBy(String descrizione) throws Exception {
+		try {
+			entityManager = EntityManagerUtil.getEntityManager();
+			return entityManager.createQuery("from genere g where g.descrizione = '" + descrizione + "'", Genere.class)
+					.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		} finally {
+			if (entityManager != null) {
+				entityManager.close();
+			}
+		}
+	}
+	
+	
+	
+
+		
 }
+

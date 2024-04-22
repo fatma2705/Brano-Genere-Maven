@@ -9,8 +9,6 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
@@ -19,8 +17,7 @@ import jakarta.persistence.Table;
 
 public class Genere {
 
-	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "brano_genere", joinColumns = @JoinColumn(name = "id_brano"), inverseJoinColumns = @JoinColumn(name = "id_genere"))
+	@ManyToMany(mappedBy = "generi", fetch = FetchType.EAGER)
 	private Set<Brano> brani = new HashSet<>();
 
 	@Id
@@ -53,6 +50,10 @@ public class Genere {
 
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
+	}
+	
+	public Set<Brano> getBrani() {
+		return brani;
 	}
 
 	@Override

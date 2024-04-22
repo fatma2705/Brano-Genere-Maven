@@ -10,6 +10,8 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
@@ -29,7 +31,10 @@ public class Brano {
 	@Column(name = "data_pubblicazione")
 	private LocalDate dataPubblicazione;
 
-	@ManyToMany(mappedBy = "brani", fetch = FetchType.EAGER)
+	
+	
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "brano_genere", joinColumns = @JoinColumn(name = "id_brano"), inverseJoinColumns = @JoinColumn(name = "id_genere"))
 	private Set<Genere> generi = new HashSet<>();
 
 	public Brano() {
@@ -73,6 +78,11 @@ public class Brano {
 
 	public void setDataPubblicazione(LocalDate dataPubblicazione) {
 		this.dataPubblicazione = dataPubblicazione;
+	}
+	
+	
+	public Set<Genere> getGeneri(){
+		return generi;
 	}
 
 	@Override
