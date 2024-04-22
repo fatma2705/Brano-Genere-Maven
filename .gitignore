@@ -1,0 +1,48 @@
+# File temporanei creati dall'IDE o dal sistema operativo
+*.class
+*.log
+*.swp
+*.tmp
+*.tmp.*
+*.bak
+*.cache
+*.diff
+*.patch
+*.orig
+*.pyc
+*.pyo
+
+
+# File di configurazione dell'IDE
+.settings/
+.classpath
+.project
+
+# Output del processo di build
+bin/
+build/
+target/
+
+# File generati automaticamente durante la compilazione
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+
+# File di dipendenze e configurazione specifici per l'ambiente di sviluppo
+.idea/
+.gradle/
+.vscode/
+*.iml
+*.ipr
+*.iws
+*.prefs
+
+# Cartella del server locale o del container (es. Tomcat)
+.tomcat/
+.jetty/
+
+# File di configurazione specifici del sistema operativo
+.DS_Store
+Thumbs.db
