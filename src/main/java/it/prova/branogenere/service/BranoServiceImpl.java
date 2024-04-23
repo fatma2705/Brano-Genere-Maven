@@ -14,6 +14,19 @@ public class BranoServiceImpl implements BranoService {
 	private BranoDAO branoDaoInstance;
 	private GenereDAO genereDaoInstance;
 	EntityManager entityManager;
+	
+	
+	@Override
+	public void setBranoDAO(BranoDAO branoDaoInstance) throws Exception {
+		this.branoDaoInstance = branoDaoInstance;
+
+	}
+
+	@Override
+	public void setGenereDAO(GenereDAO genereDaoInstance) throws Exception {
+		this.genereDaoInstance = genereDaoInstance;
+
+	}
 
 	@Override
 	public List<Brano> getAll() throws Exception {
@@ -188,16 +201,6 @@ public class BranoServiceImpl implements BranoService {
 
 	}
 
-	@Override
-	public void setBranoDAO(BranoDAO branoDaoInstance) throws Exception {
-		this.branoDaoInstance = branoDaoInstance;
-
-	}
-
-	@Override
-	public void setGenereDAO(GenereDAO genereDaoInstance) throws Exception {
-		this.genereDaoInstance = genereDaoInstance;
-
-	}
+	
 
 }

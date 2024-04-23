@@ -1,12 +1,10 @@
 package it.prova.branogenere.dao;
 
 import java.util.List;
-import java.util.Set;
 
 import it.prova.branogenere.model.Brano;
 import it.prova.branogenere.model.Genere;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.Query;
 
@@ -94,7 +92,7 @@ public class BranoDAOImpl implements BranoDAO {
 		try {
 			entityManager = EntityManagerUtil.getEntityManager();
 			Query query = entityManager.createQuery(
-					"SELECT COUNT(b) FROM Brano b WHERE b.titolo = :titoloBrano AND b.autore = :autoreBrano AND b.data_pubblicazione = :dataPubblicazione",
+					"SELECT COUNT(*) FROM Brano b WHERE b.titolo = :titoloBrano AND b.autore = :autoreBrano AND b.dataPubblicazione = :dataPubblicazione",
 					Long.class);
 			query.setParameter("titoloBrano", brano.getTitolo());
 			query.setParameter("autoreBrano", brano.getAutore());

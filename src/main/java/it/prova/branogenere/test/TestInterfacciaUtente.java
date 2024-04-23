@@ -1,13 +1,14 @@
 package it.prova.branogenere.test;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
 import it.prova.branogenere.model.Brano;
-import it.prova.branogenere.model.Genere;
 import it.prova.branogenere.service.BranoService;
 import it.prova.branogenere.service.GenereService;
 import it.prova.branogenere.service.MyServiceFactory;
@@ -56,15 +57,20 @@ public class TestInterfacciaUtente {
    					System.out.println("ERRORE : non è  stata inserita una stringa ");
    					System.exit(0);
    				}
-                   System.out.println("Inserisci data pubblicazione del brano (formato dd/MM/yyyy):");
                    LocalDate InputDataPubblicazione = null;
-                   try {
-   					String dataPubblicazione = scanner.nextLine();
-   				} catch (InputMismatchException e) {
-   					System.out.println("ERRORE : non è  stata inserita una data ");
-   					System.exit(0);
 
-   				}
+                   System.out.println("Inserisci data pubblicazione del brano (formato \"yyyy-MM-dd\"):");
+                   String dataPubblicazioneStr = scanner.nextLine();
+
+                   try {
+                       // Effettua il parsing della stringa in un oggetto LocalDate
+                       InputDataPubblicazione = LocalDate.parse(dataPubblicazioneStr, DateTimeFormatter.ofPattern( "yyyy-MM-dd"));
+                   } catch (DateTimeParseException e) {
+                       System.out.println("ERRORE: Formato data non valido. Assicurati di inserire la data nel formato corretto  \"yyyy-MM-dd\".");
+                       System.exit(0);
+                   }
+
+   				
                    System.out.print("A Quanti generi vuoi associare questo brano? ");
    				int numGeneri = 0;
    				boolean inputValido = false;

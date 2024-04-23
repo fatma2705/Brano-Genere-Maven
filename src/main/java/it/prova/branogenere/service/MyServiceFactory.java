@@ -13,6 +13,7 @@ public class MyServiceFactory {
 
 			try {
 				branoServiceInstance.setBranoDAO(MyDAOFactory.getBranoDaoInstance());
+				branoServiceInstance.setGenereDAO(MyDAOFactory.getGenereDaoInstance());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -28,7 +29,6 @@ public class MyServiceFactory {
 			try {
 
 				genereServiceInstance.setGenereDAO(MyDAOFactory.getGenereDaoInstance());
-				genereServiceInstance.setBranoDAO(MyDAOFactory.getBranoDaoInstance());
 			} catch (Exception e) {
 
 				e.printStackTrace();

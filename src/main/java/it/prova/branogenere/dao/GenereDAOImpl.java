@@ -1,18 +1,22 @@
 package it.prova.branogenere.dao;
 
 import java.util.List;
-import java.util.Set;
 
 import it.prova.branogenere.model.Brano;
 import it.prova.branogenere.model.Genere;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.Query;
 
 public class GenereDAOImpl implements GenereDAO {
 
 	EntityManager entityManager;
+	
+
+	@Override
+	public void setEntityManager(EntityManager entityManager) {
+		this.entityManager = entityManager;
+	}
 
 	@Override
 	public List<Genere> getAll() throws Exception {
@@ -107,10 +111,6 @@ public class GenereDAOImpl implements GenereDAO {
 		}
 	}
 
-	@Override
-	public void setEntityManager(EntityManager entityManager) {
-		this.entityManager = entityManager;
-	}
 
 	@Override
 	public void deleteBranoGenereAssociazione(Genere genere) throws Exception {
@@ -141,7 +141,7 @@ public class GenereDAOImpl implements GenereDAO {
 	public Genere getBy(String descrizione) throws Exception {
 		try {
 			entityManager = EntityManagerUtil.getEntityManager();
-			return entityManager.createQuery("from genere g where g.descrizione = '" + descrizione + "'", Genere.class)
+			return entityManager.createQuery("from Genere g where g.descrizione = '" + descrizione + "'", Genere.class)
 					.getSingleResult();
 		} catch (NoResultException e) {
 			return null;

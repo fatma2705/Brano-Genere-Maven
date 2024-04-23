@@ -13,6 +13,20 @@ public class GenereServiceImpl implements GenereService {
 	private GenereDAO genereDaoInstance;
 	private BranoDAO branoDaoInstance;
 	EntityManager entityManager;
+	
+	
+	@Override
+	public void setGenereDAO(GenereDAO genereInstance) throws Exception {
+		this.genereDaoInstance = genereInstance;
+
+	}
+
+	@Override
+	public void setBranoDAO(BranoDAO branoInstance) throws Exception {
+		this.branoDaoInstance = branoInstance;
+
+	}
+
 
 	@Override
 	public List<Genere> getAll() throws Exception {
@@ -144,16 +158,5 @@ public class GenereServiceImpl implements GenereService {
 
 	}
 
-	@Override
-	public void setGenereDAO(GenereDAO genereInstance) throws Exception {
-		this.genereDaoInstance = genereInstance;
-
-	}
-
-	@Override
-	public void setBranoDAO(BranoDAO branoInstance) throws Exception {
-		this.branoDaoInstance = branoInstance;
-
-	}
-
+	
 }
