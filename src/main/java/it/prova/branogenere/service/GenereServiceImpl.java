@@ -99,6 +99,7 @@ public class GenereServiceImpl implements GenereService {
 
 	@Override
 	public void delete(Genere genereInstance) throws Exception {
+		entityManager = EntityManagerUtil.getEntityManager();
 		try {
 			// controllo se sono stati inseriti i dati nella variabile genereInstance
 			if (genereInstance == null) {

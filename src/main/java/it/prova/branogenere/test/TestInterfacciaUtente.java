@@ -268,6 +268,19 @@ public class TestInterfacciaUtente {
 				TestBranoGenere.aggiornaGenere(genereServiceInstance, genereG);
 				break; 
 			case 10:
+				System.out.println("Hai scelto di eliminare un genere");
+				System.out.println("Inserisci L'id del genere da eliminare:");
+				Long idGenere = null;
+				try {
+					idGenere = scanner.nextLong();
+				} catch (InputMismatchException e) {
+					System.out.println("ERRORE : non è  stato inserito un long ");
+					System.exit(0);
+				}
+				scanner.nextLine();
+				Genere deleteGenere = new Genere(idGenere);
+				TestBranoGenere.rimuoviGenere(genereServiceInstance, deleteGenere);
+			case 11:
 				exit = true;
 				break;
 

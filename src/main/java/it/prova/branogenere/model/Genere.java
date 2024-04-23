@@ -36,6 +36,10 @@ public class Genere {
 		this.descrizione = descrizione;
 	}
 
+	public Genere(Long id) {
+		this.id = id;
+	}
+
 	public Long getId() {
 		return id;
 	}

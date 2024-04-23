@@ -124,7 +124,7 @@ public class GenereDAOImpl implements GenereDAO {
 					"DELETE FROM  brano_genere WHERE  id_genere = :idGenere AND id_brano =  :idBrano");
 			for (Brano brano : genere.getBrani()) {
 				query.setParameter("idGenere", genere.getId());
-				query.setParameter("id_brano", brano.getId());
+				query.setParameter("idBrano", brano.getId());
 				query.executeUpdate();
 			}
 			entityManager.getTransaction().commit();
