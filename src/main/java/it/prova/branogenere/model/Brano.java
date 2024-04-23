@@ -48,6 +48,10 @@ public class Brano {
 		this.dataPubblicazione = dataPubblicazione;
 	}
 
+	public Brano(Long id) {
+		this.id = id;
+	}
+
 	public Long getId() {
 		return id;
 	}

@@ -12,6 +12,8 @@ import it.prova.branogenere.model.Brano;
 import it.prova.branogenere.service.BranoService;
 import it.prova.branogenere.service.GenereService;
 import it.prova.branogenere.service.MyServiceFactory;
+import it.prova.menupizzeria.model.Pizza;
+import it.prova.menupizzeria.test.TestMenuPizzeria;
 
 public class TestInterfacciaUtente {
 
@@ -187,8 +189,18 @@ public class TestInterfacciaUtente {
 
                 case 4:
                     System.out.println("Hai scelto di eliminare un brano");
-                    // Codice per eliminare un brano
-                    break;
+                    System.out.println("Inserisci L'id  del brano da eliminare:");
+    				Long idb = null;
+    				try {
+    					idb = scanner.nextLong();
+    				} catch (InputMismatchException e) {
+    					System.out.println("ERRORE : non è  stato inserito un Long ");
+    					System.exit(0);
+    				}
+    				scanner.nextLine();
+    				Brano branob = new Brano(idb);
+    				TestBranoGenere.rimuoviBrano(branoServiceInstance, branob);
+
 
                 case 5:
                     System.out.println("Hai scelto di aggiungere un genere");
