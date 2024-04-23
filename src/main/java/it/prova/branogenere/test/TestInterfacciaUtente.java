@@ -227,7 +227,16 @@ public class TestInterfacciaUtente {
 
 			case 7:
 				System.out.println("Hai scelto di leggere un genere");
-				// Codice per leggere un genere
+				System.out.println("Inserisci L'id  del genere da leggere:");
+				Long idg = null;
+				try {
+					idg = scanner.nextLong();
+				} catch (InputMismatchException e) {
+					System.out.println("ERRORE : non è  stato inserito un long ");
+					System.exit(0);
+				}
+				scanner.nextLine();
+				TestBranoGenere.getGenere(genereServiceInstance, idg);
 				break;
 
 			case 8:

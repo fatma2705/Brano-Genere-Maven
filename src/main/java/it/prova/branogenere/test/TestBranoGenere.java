@@ -125,11 +125,11 @@ public class TestBranoGenere {
     }
 
     public static void getGenere(GenereService genereInstance, Long id) {
-        System.out.println(" -----------------------Stampa Genere con l' id : " + id + " ----------------");
+        System.out.println(" -----------------------Test Stampa Genere con l' id : " + id + " ----------------");
 
         try {
             System.out.println(genereInstance.getElemento(id));
-            System.out.println(" --------------------------------------------------------------------");
+            System.out.println(" ------------------------------Fine Test Stampa Genere--------------------------------------");
 
         } catch (Exception e) {
             e.printStackTrace();
