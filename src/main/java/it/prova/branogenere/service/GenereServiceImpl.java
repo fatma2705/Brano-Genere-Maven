@@ -32,7 +32,7 @@ public class GenereServiceImpl implements GenereService {
 	public List<Genere> getAll() throws Exception {
 		entityManager = EntityManagerUtil.getEntityManager();
 		try {
-			branoDaoInstance.setEntityManager(entityManager);
+			genereDaoInstance.setEntityManager(entityManager);
 			if (genereDaoInstance.getAll().isEmpty()) {
 				System.out.println("Database vuoto nulla da stampare");
 				System.exit(0);

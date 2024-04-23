@@ -240,8 +240,8 @@ public class TestInterfacciaUtente {
 				break;
 
 			case 8:
-				System.out.println("Hai scelto di aggiornare un genere");
-				// Codice per aggiornare un genere
+				System.out.println("Hai scelto di leggere tutti i generi");
+				TestBranoGenere.getAllGeneri(genereServiceInstance);
 				break;
 
 			case 9:
