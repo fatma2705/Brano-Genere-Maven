@@ -88,7 +88,7 @@ public class Brano {
 	@Override
 	public String toString() {
 		return "Brano [id=" + id + ", titolo=" + titolo + ", autore=" + autore + ", dataPubblicazione="
-				+ dataPubblicazione + "]";
+				+ dataPubblicazione + "\n Generi associati=" + generi + "]";
 	}
 
 }

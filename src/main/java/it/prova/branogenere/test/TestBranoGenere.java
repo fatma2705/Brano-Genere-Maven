@@ -31,7 +31,7 @@ public class TestBranoGenere {
         try {
             branoInstance.insert(brano, generi);
 
-            System.out.println(" ----------- Test Brano inserito con successo ----");
+            System.out.println(" ----------- Fine Test Brano  ----");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -63,11 +63,11 @@ public class TestBranoGenere {
     }
 
     public static void getBrano(BranoService branoInstance, Long id) {
-        System.out.println(" -----------------------Stampa Brano con l' id : " + id + " ----------------");
+        System.out.println(" -----------------------Test Stampa Brano con l' id : " + id + " ----------------");
 
         try {
             System.out.println(branoInstance.getElemento(id));
-            System.out.println(" --------------------------------------------------------------------");
+            System.out.println(" ----------------------------Fine Test----------------------------------------");
 
         } catch (Exception e) {
             e.printStackTrace();

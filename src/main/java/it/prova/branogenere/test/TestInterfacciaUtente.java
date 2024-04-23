@@ -104,8 +104,17 @@ public class TestInterfacciaUtente {
 
                 case 2:
                     System.out.println("Hai scelto di leggere un brano");
-                    branoServiceInstance.getAll();
-                    break;
+                    System.out.println("Inserisci L'id  del brano da leggere:");
+    				Long id = null;
+    				try {
+    					id = scanner.nextLong();
+    				} catch (InputMismatchException e) {
+    					System.out.println("ERRORE : non è  stato inserito un long ");
+    					System.exit(0);
+    				}
+    				scanner.nextLine();
+    				TestBranoGenere.getBrano(branoServiceInstance, id);
+
 
                 case 3:
                     System.out.println("Hai scelto di aggiornare un brano");
