@@ -118,8 +118,72 @@ public class TestInterfacciaUtente {
 
                 case 3:
                     System.out.println("Hai scelto di aggiornare un brano");
-                    // Codice per aggiornare un brano
-                    break;
+                    System.out.println("Inserisci l'id del brano da aggiornare:");
+    				Long idB = null;
+    				try {
+    					idB = scanner.nextLong();
+    				} catch (InputMismatchException e) {
+    					System.out.println("ERRORE: Non è stato inserito un long valido");
+    					System.exit(0);
+    				}
+    				scanner.nextLine();
+
+    				System.out.println("Inserisci il nuovo titolo del brano da aggiornare:");
+    				String titoloB = "";
+    				try {
+    					titoloB = scanner.nextLine();
+    				} catch (InputMismatchException e) {
+    					System.out.println("ERRORE: Non è stata inserita una Stringa ");
+    					System.exit(0);
+    				}
+
+    				System.out.println("Inserisci il nuovo autore della pizza da aggiornare:");
+    				String autoreB = "";
+    				try {
+    					autoreB = scanner.nextLine();
+    				} catch (InputMismatchException e) {
+    					System.out.println("ERRORE: Non è stata inserita una stringa valida");
+    					System.exit(0);
+    				}
+    				 LocalDate InputDataPubblicazioneB = null;
+
+    				 System.out.println("Inserisci la nuova  data pubblicazione del brano (formato \"yyyy-MM-dd\"):");
+                     String dataPubblicazioneB = scanner.nextLine();
+
+                     try {
+                         InputDataPubblicazioneB = LocalDate.parse(dataPubblicazioneB, DateTimeFormatter.ofPattern( "yyyy-MM-dd"));
+                     } catch (DateTimeParseException e) {
+                         System.out.println("ERRORE: Formato data non valido. Assicurati di inserire la data nel formato corretto  \"yyyy-MM-dd\".");
+                         System.exit(0);
+                     }
+    				System.out.println("Quanti generi vuoi aggiornare?");
+    				int numGeneriB = 0;
+    				boolean inpuTValido = false;
+    				while (!inpuTValido) {
+    					try {
+    						numGeneriB = Integer.parseInt(scanner.nextLine());
+    						inpuTValido = true;
+    					} catch (NumberFormatException e) {
+    						System.out.println("Inserisci un numero valido.");
+    					}
+    				}
+
+    				List<String> generiB = new ArrayList<>();
+
+    				for (int i = 0; i < numGeneriB; i++) {
+    					System.out.print("Inserisci il genere #" + (i + 1) + ": ");
+    					String genere = scanner.nextLine();
+    					generiB.add(genere);
+    				}
+
+    				System.out.println("I generi inseriti sono:");
+    				for (String genere : generiB) {
+    					System.out.println("- " + genere);
+    				}
+    				scanner.nextLine();
+    				Brano branoB = new Brano(idB,titoloB,autoreB,InputDataPubblicazioneB);
+    				TestBranoGenere.aggiornaBrano(branoServiceInstance, branoB, generiB);
+    				break;
 
                 case 4:
                     System.out.println("Hai scelto di eliminare un brano");
