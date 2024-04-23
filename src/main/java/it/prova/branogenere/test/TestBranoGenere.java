@@ -88,11 +88,11 @@ public class TestBranoGenere {
         }
     }
 
-    public static void inserisciGenere(GenereService genereInstance, Genere genere, List<String> brani) {
+    public static void inserisciGenere(GenereService genereInstance, Genere genere) {
         System.out.println(" ----------- Inserisci Genere -------------");
 
         try {
-            genereInstance.insert(genere, brani);
+            genereInstance.insert(genere);
             System.out.println(" ----------- Genere inserito con successo ----");
 
         } catch (Exception e) {

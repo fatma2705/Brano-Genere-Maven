@@ -99,7 +99,7 @@ public class GenereDAOImpl implements GenereDAO {
 		try {
 			entityManager = EntityManagerUtil.getEntityManager();
 			Query query = entityManager
-					.createQuery("SELECT COUNT(g) FROM genere b WHERE g.descrizione = :descrizioneGenere", Long.class);
+					.createQuery("SELECT COUNT(*) FROM Genere g WHERE g.descrizione = :descrizioneGenere", Long.class);
 			query.setParameter("descrizioneGenere", genere.getDescrizione());
 			Long result = (Long) query.getSingleResult();
 			System.out.println("----------result " + result);

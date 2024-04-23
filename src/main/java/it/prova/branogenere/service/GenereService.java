@@ -12,7 +12,7 @@ public interface GenereService {
 
 	public Genere getElemento(Long id) throws Exception;
 
-	public void insert(Genere genereInstance, List<String> listaBrani) throws Exception;
+	public void insert(Genere genereInstance) throws Exception;
 
 	public void delete(Genere genereInstance) throws Exception;
 

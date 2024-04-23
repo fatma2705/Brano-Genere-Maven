@@ -69,7 +69,8 @@ public class GenereServiceImpl implements GenereService {
 	}
 
 	@Override
-	public void insert(Genere genereInstance, List<String> listaBrani) throws Exception {
+	public void insert(Genere genereInstance) throws Exception {
+		entityManager = EntityManagerUtil.getEntityManager();
 		try {
 			if (genereInstance.equals(null)) {
 				System.out.println("ERRORE: dati genere non inseriti");

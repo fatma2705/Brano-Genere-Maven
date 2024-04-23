@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import it.prova.branogenere.model.Brano;
+import it.prova.branogenere.model.Genere;
 import it.prova.branogenere.service.BranoService;
 import it.prova.branogenere.service.GenereService;
 import it.prova.branogenere.service.MyServiceFactory;
@@ -212,7 +213,16 @@ public class TestInterfacciaUtente {
 
 			case 6:
 				System.out.println("Hai scelto di aggiungere un genere");
-				// Codice per aggiungere un genere
+				System.out.println("Inserisci la descrizione  del genere da aggiungere");
+				String descrizione = "";
+				try {
+					descrizione = scanner.nextLine();
+				} catch (InputMismatchException e) {
+					System.out.println("ERRORE : non è  stata inserita una stringa ");
+					System.exit(0);
+				}
+				Genere genere = new Genere(null,descrizione);
+				TestBranoGenere.inserisciGenere(genereServiceInstance, genere);
 				break;
 
 			case 7:
