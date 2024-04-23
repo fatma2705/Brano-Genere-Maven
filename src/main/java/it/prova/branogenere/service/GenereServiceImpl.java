@@ -13,8 +13,7 @@ public class GenereServiceImpl implements GenereService {
 	private GenereDAO genereDaoInstance;
 	private BranoDAO branoDaoInstance;
 	EntityManager entityManager;
-	
-	
+
 	@Override
 	public void setGenereDAO(GenereDAO genereInstance) throws Exception {
 		this.genereDaoInstance = genereInstance;
@@ -26,7 +25,6 @@ public class GenereServiceImpl implements GenereService {
 		this.branoDaoInstance = branoInstance;
 
 	}
-
 
 	@Override
 	public List<Genere> getAll() throws Exception {
@@ -143,9 +141,10 @@ public class GenereServiceImpl implements GenereService {
 			entityManager.getTransaction().begin();
 
 			genereDaoInstance.setEntityManager(entityManager);
-			if (!(genereDaoInstance.exist(genereInstance)))
+			if (genereDaoInstance.getElement(genereInstance.getId()) == null) {
 				System.out.println("ERRORE: Non esiste un genere con questi dati ");
-			System.exit(0);
+				System.exit(0);
+			}
 			genereDaoInstance.update(genereInstance);
 			System.out.println(" genere aggiornato con succcesso");
 			entityManager.getTransaction().commit();
@@ -159,5 +158,4 @@ public class GenereServiceImpl implements GenereService {
 
 	}
 
-	
 }

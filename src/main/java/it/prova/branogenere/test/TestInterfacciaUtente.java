@@ -245,10 +245,28 @@ public class TestInterfacciaUtente {
 				break;
 
 			case 9:
-				System.out.println("Hai scelto di eliminare un genere");
-				// Codice per eliminare un genere
-				break;
-
+				System.out.println("Hai scelto di aggiornare un genere");
+				System.out.println("Inserisci L'id  del genere da aggiornare:");
+				Long idG = null;
+				try {
+					idG = scanner.nextLong();
+				} catch (InputMismatchException e) {
+					System.out.println("ERRORE : non è  stato inserito un long ");
+					System.exit(0);
+				}
+				scanner.nextLine();
+				System.out.println("Inserisci la nuova  descrizione  del genere ");
+				String descrizioneG = "";
+				try {
+					descrizioneG = scanner.nextLine();
+				} catch (InputMismatchException e) {
+					System.out.println("ERRORE : non è  stata inserita una stringa ");
+					System.exit(0);
+				}
+				
+				Genere genereG = new Genere(idG,descrizioneG);
+				TestBranoGenere.aggiornaGenere(genereServiceInstance, genereG);
+				break; 
 			case 10:
 				exit = true;
 				break;
