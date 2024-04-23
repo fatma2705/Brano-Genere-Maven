@@ -19,6 +19,8 @@ public interface BranoService {
 	public void delete(Brano branoInstance) throws Exception;
 
 	public void update(Brano branoInstance, List<String> listaGeneri) throws Exception;
+	
+	public void ListaBraniConpiuDinCaratteri(int n) throws Exception;
 
 	public void setBranoDAO(BranoDAO branoDaoInstance) throws Exception;
 

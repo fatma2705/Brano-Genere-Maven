@@ -141,12 +141,24 @@ public class TestBranoGenere {
 
          try {
             genereInstance.listaGeneriDiBraniPubblicatiTra(primaData, secondaData);
-             System.out.println(" ------------------------------FineLista generi dei brani tra--------------------------------------");
+             System.out.println(" ------------------------------Fine Test Lista generi dei brani tra--------------------------------------");
 
          } catch (Exception e) {
              e.printStackTrace();
          }
      }
+    
+    public static void ListBraniConLunghezzaPiu(BranoService branoInstance,int n) {
+   	 System.out.println(" -----------------------Test Brani con lunghezza più ----------------");
+
+        try {
+        	branoInstance.ListaBraniConpiuDinCaratteri(n);
+        	System.out.println(" ------------------------------Fine Test  Brani con lunghezza più--------------------------------------");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
 
 

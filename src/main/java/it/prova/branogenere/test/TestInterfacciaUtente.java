@@ -34,7 +34,8 @@ public class TestInterfacciaUtente {
 			System.out.println("9. Aggiornare un genere");
 			System.out.println("10. Eliminare un genere");
 			System.out.println("11. Lista I generi dei brani Pubblicati tra ");
-			System.out.println("12. Uscire");
+			System.out.println("12. Lista i brani con descrizione genere più di");
+			System.out.println("13. Uscire");
 
 			int choice = scanner.nextInt();
 			scanner.nextLine();
@@ -301,6 +302,17 @@ public class TestInterfacciaUtente {
 				}
 				genereServiceInstance.listaGeneriDiBraniPubblicatiTra(primaData, secondaData);
 			case 12:
+				System.out.println("Hai scelto di listare tutti i brani con descrizione genere più di");
+				System.out.println("Inserisci la lunghezza:");
+				int n = 0;
+				try {
+					n = scanner.nextInt();
+				} catch (InputMismatchException e) {
+					System.out.println("ERRORE : non è  stato inserito un'anno valido ");
+					System.exit(0);
+				}
+				TestBranoGenere.ListBraniConLunghezzaPiu(branoServiceInstance, n);
+			case 13:
 				exit = true;
 				break;
 

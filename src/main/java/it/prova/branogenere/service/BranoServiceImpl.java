@@ -201,6 +201,31 @@ public class BranoServiceImpl implements BranoService {
 
 	}
 
+	@Override
+	public void ListaBraniConpiuDinCaratteri(int n) throws Exception {
+		entityManager = EntityManagerUtil.getEntityManager();
+		try {
+			if (n ==  0 ) {
+				System.out.println("ERRORE: lunghezza desiderata non inserita");
+				System.exit(0);
+			}
+			entityManager.getTransaction().begin();
+
+			genereDaoInstance.setEntityManager(entityManager);
+			System.out.println("I brani con generi con descrizione più di  " + n + " sono \n");
+			System.out.println(branoDaoInstance.ListaBraniConpiuDinCaratteri(n));
+			entityManager.getTransaction().commit();
+		} catch (Exception e) {
+			entityManager.getTransaction().rollback();
+			e.printStackTrace();
+			throw e;
+		} finally {
+			EntityManagerUtil.closeEntityManager(entityManager);
+		}
+
+	}
+	}
+
 	
 
-}
+
