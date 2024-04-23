@@ -33,7 +33,8 @@ public class TestInterfacciaUtente {
 			System.out.println("8. Leggere tutti i generi");
 			System.out.println("9. Aggiornare un genere");
 			System.out.println("10. Eliminare un genere");
-			System.out.println("11. Uscire");
+			System.out.println("11. Lista I generi dei brani Pubblicati tra ");
+			System.out.println("12. Uscire");
 
 			int choice = scanner.nextInt();
 			scanner.nextLine();
@@ -281,6 +282,25 @@ public class TestInterfacciaUtente {
 				Genere deleteGenere = new Genere(idGenere);
 				TestBranoGenere.rimuoviGenere(genereServiceInstance, deleteGenere);
 			case 11:
+				System.out.println(" Hai scelto di listare i generi dei brani pubblicati tra");
+				System.out.println("Inserisci il primo anno:");
+				int primaData = 0;
+				try {
+					primaData = scanner.nextInt();
+				} catch (InputMismatchException e) {
+					System.out.println("ERRORE : non è  stato inserito un'anno valido ");
+					System.exit(0);
+				}
+				System.out.println("Inserisci il secondo anno:");
+				int secondaData = 0;
+				try {
+					secondaData = scanner.nextInt();
+				} catch (InputMismatchException e) {
+					System.out.println("ERRORE : non è  stato inserito un'anno valido ");
+					System.exit(0);
+				}
+				genereServiceInstance.listaGeneriDiBraniPubblicatiTra(primaData, secondaData);
+			case 12:
 				exit = true;
 				break;
 

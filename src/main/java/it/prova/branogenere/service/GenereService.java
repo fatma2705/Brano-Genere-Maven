@@ -17,6 +17,8 @@ public interface GenereService {
 	public void delete(Genere genereInstance) throws Exception;
 
 	public void update(Genere genereInstance) throws Exception;
+	
+	public void listaGeneriDiBraniPubblicatiTra(int primaData,int secondaData) throws Exception;
 
 	public void setGenereDAO(GenereDAO genereInstance) throws Exception;
 

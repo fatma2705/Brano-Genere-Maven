@@ -135,7 +135,18 @@ public class TestBranoGenere {
             e.printStackTrace();
         }
     }
+    
+    public static void ListGeneriBraniTra(GenereService genereInstance,int primaData,int secondaData) {
+    	 System.out.println(" -----------------------Test Lista generi dei brani tra ----------------");
 
+         try {
+            genereInstance.listaGeneriDiBraniPubblicatiTra(primaData, secondaData);
+             System.out.println(" ------------------------------FineLista generi dei brani tra--------------------------------------");
+
+         } catch (Exception e) {
+             e.printStackTrace();
+         }
+     }
 }
 
 

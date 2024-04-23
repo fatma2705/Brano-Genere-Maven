@@ -2,8 +2,6 @@ package it.prova.branogenere.dao;
 
 import java.util.List;
 
-import it.prova.branogenere.model.Brano;
-import it.prova.branogenere.model.Genere;
 import jakarta.persistence.EntityManager;
 
 public interface IBaseDAO<T> {

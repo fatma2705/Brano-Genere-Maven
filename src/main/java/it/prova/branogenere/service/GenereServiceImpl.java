@@ -159,4 +159,27 @@ public class GenereServiceImpl implements GenereService {
 
 	}
 
+	@Override
+	public void listaGeneriDiBraniPubblicatiTra(int primaData, int secondaData) throws Exception {
+		entityManager = EntityManagerUtil.getEntityManager();
+		try {
+			if (primaData == 0 || secondaData == 0 ) {
+				System.out.println("ERRORE: date non inserite");
+				System.exit(0);
+			}
+			entityManager.getTransaction().begin();
+
+			genereDaoInstance.setEntityManager(entityManager);
+			System.out.println("I generi dei brani pubblicati tra l'anno " + primaData + " e l'anno " + secondaData + " sono \n");
+			System.out.println(genereDaoInstance.listaGeneriDiBraniPubblicatiTra(primaData, secondaData));
+			entityManager.getTransaction().commit();
+		} catch (Exception e) {
+			entityManager.getTransaction().rollback();
+			e.printStackTrace();
+			throw e;
+		} finally {
+			EntityManagerUtil.closeEntityManager(entityManager);
+		}
+
+	}
 }

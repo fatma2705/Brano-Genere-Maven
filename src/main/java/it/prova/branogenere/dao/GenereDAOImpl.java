@@ -1,5 +1,6 @@
 package it.prova.branogenere.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import it.prova.branogenere.model.Brano;
@@ -11,7 +12,6 @@ import jakarta.persistence.Query;
 public class GenereDAOImpl implements GenereDAO {
 
 	EntityManager entityManager;
-	
 
 	@Override
 	public void setEntityManager(EntityManager entityManager) {
@@ -111,12 +111,11 @@ public class GenereDAOImpl implements GenereDAO {
 		}
 	}
 
-
 	@Override
 	public void deleteBranoGenereAssociazione(Genere genere) throws Exception {
 		entityManager = EntityManagerUtil.getEntityManager();
 		try {
-			if (genere == null ) {
+			if (genere == null) {
 				throw new Exception("Errore valore input");
 			}
 			entityManager.getTransaction().begin();
@@ -151,10 +150,48 @@ public class GenereDAOImpl implements GenereDAO {
 			}
 		}
 	}
-	
-	
-	
 
-		
+	@Override
+	public List<Genere> listaGeneriDiBraniPubblicatiTra(int primaData, int secondaData) throws Exception {
+	    
+	    try {
+	        entityManager = EntityManagerUtil.getEntityManager();
+	        entityManager.getTransaction().begin();
+
+	        Query query = entityManager.createNativeQuery(
+	                "SELECT b.id FROM Brano b WHERE YEAR(b.data_pubblicazione) > :primaData AND YEAR(b.data_pubblicazione) < :secondaData");
+	        query.setParameter("primaData", primaData);
+	        query.setParameter("secondaData", secondaData);
+	        List<Long> branoIds = query.getResultList();
+
+	        if (branoIds.isEmpty()) {
+	            System.out.println("Non ci sono brani nel DB pubblicati in quel periodo");
+	        }
+
+	        List<Genere> generi = new ArrayList<>();
+	        for (Long branoId : branoIds) {
+	            Query secondaQuery = entityManager.createNativeQuery("SELECT id_genere FROM brano_genere WHERE id_brano = :id");
+	            secondaQuery.setParameter("id", branoId);
+	            List<Long> genereIds = secondaQuery.getResultList();
+
+	            for (Long genereId : genereIds) {
+	                Genere genere = entityManager.find(Genere.class, genereId);
+	                generi.add(genere);
+	            }
+	        }
+
+	        entityManager.getTransaction().commit();
+	        return generi;
+	    } catch (Exception e) {
+	        if (entityManager != null && entityManager.getTransaction().isActive()) {
+	            entityManager.getTransaction().rollback();
+	        }
+	        throw e;
+	    } finally {
+	        if (entityManager != null && entityManager.isOpen()) {
+	            entityManager.close();
+	        }
+	    }
+	}
+
 }
-
