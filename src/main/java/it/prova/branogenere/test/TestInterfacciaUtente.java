@@ -35,7 +35,8 @@ public class TestInterfacciaUtente {
 			System.out.println("10. Eliminare un genere");
 			System.out.println("11. Lista I generi dei brani Pubblicati tra ");
 			System.out.println("12. Lista i brani con descrizione genere più di");
-			System.out.println("13. Uscire");
+			System.out.println("13. Estrai lista di descrizioni genere associate ad un brano");
+			System.out.println("14. Uscire");
 
 			int choice = scanner.nextInt();
 			scanner.nextLine();
@@ -313,6 +314,18 @@ public class TestInterfacciaUtente {
 				}
 				TestBranoGenere.ListBraniConLunghezzaPiu(branoServiceInstance, n);
 			case 13:
+				System.out.println("Hai scelto di estrarre una lista di descrizioni genere associate ad un brano");
+				System.out.println("Inserisci il titolo del brano:");
+				String titoloT = "";
+				try {
+					titoloT = scanner.nextLine();
+				} catch (InputMismatchException e) {
+					System.out.println("ERRORE : non è  stata inserita una stringa ");
+					System.exit(0);
+				}
+				TestBranoGenere.estraiListaDescrizioneGenereAssociateAdUnBrano(branoServiceInstance, titoloT);;
+				
+			case 14:
 				exit = true;
 				break;
 

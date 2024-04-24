@@ -17,7 +17,7 @@ import jakarta.persistence.Table;
 
 public class Genere {
 
-	@ManyToMany(mappedBy = "generi", fetch = FetchType.EAGER)
+	@ManyToMany(mappedBy = "generi", fetch = FetchType.LAZY)
 	private Set<Brano> brani = new HashSet<>();
 
 	@Id

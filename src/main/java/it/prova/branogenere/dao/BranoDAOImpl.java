@@ -1,6 +1,5 @@
 package it.prova.branogenere.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import it.prova.branogenere.model.Brano;
@@ -17,7 +16,7 @@ public class BranoDAOImpl implements BranoDAO {
 	public List<Brano> getAll() throws Exception {
 		try {
 			entityManager = EntityManagerUtil.getEntityManager();
-			return entityManager.createQuery("from Brano", Brano.class).getResultList();
+			return entityManager.createQuery("SELECT DISTINCT b FROM Brano b LEFT JOIN FETCH b.generi ", Brano.class).getResultList();
 		} finally {
 			if (entityManager != null) {
 				entityManager.close();
@@ -175,34 +174,20 @@ public class BranoDAOImpl implements BranoDAO {
 	}
 
 	@Override
-	public List<Brano> ListaBraniConpiuDinCaratteri(int n) throws Exception {
+	public List<Brano> listaBraniConGeneriConDescrizionePiuDiNCaratteri(int n) throws Exception {
 		 try {
 		        entityManager = EntityManagerUtil.getEntityManager();
-		        entityManager.getTransaction().begin();
+		        
 
 		        Query query = entityManager.createNativeQuery(
-		                "SELECT g.id FROM genere g WHERE  LENGTH(g.descrizione) > :n");
+		                "SELECT b.* " +
+		                "FROM brano b " +
+		                "INNER JOIN brano_genere bg ON b.id = bg.id_brano " +
+		                "INNER JOIN genere g ON bg.id_genere = g.id " +
+		                "WHERE length(g.descrizione) > :n",Brano.class);
 		        query.setParameter("n", n);
-		        List<Long> genereId = query.getResultList();
+		        return query.getResultList();
 
-		        if (genereId.isEmpty()) {
-		            System.out.println("Non ci sono genri nel DB con questa lunghezza di caratteri");
-		        }
-
-		        List<Brano> brani = new ArrayList<>();
-		        for (Long genere : genereId) {
-		            Query secondaQuery = entityManager.createNativeQuery("SELECT id_brano FROM brano_genere WHERE id_genere = :id");
-		            secondaQuery.setParameter("id", genere);
-		            List<Long> braniId = secondaQuery.getResultList();
-
-		            for (Long branoId : braniId) {
-		                Brano brano = entityManager.find(Brano.class, branoId);
-		                brani.add(brano);
-		            }
-		        }
-
-		        entityManager.getTransaction().commit();
-		        return brani;
 		    } catch (Exception e) {
 		        if (entityManager != null && entityManager.getTransaction().isActive()) {
 		            entityManager.getTransaction().rollback();
@@ -215,5 +200,30 @@ public class BranoDAOImpl implements BranoDAO {
 		    }
 		}
 
+	@Override
+	public List<Genere> estraiListaDescrizioneGenereAssociateAdUnBrano(String titolo) throws Exception {
+        entityManager = EntityManagerUtil.getEntityManager();
+        
+        try {
+        Query query = entityManager.createNativeQuery(
+        		"SELECT  g.* "
+    	                + " FROM genere g "
+    	                + " INNER JOIN  brano_genere bg ON g.id = bg.id_genere "
+    	                + " INNER JOIN brano b ON bg.id_brano = b.id "
+    	                + " WHERE  b.titolo = :titolo ",Genere.class);
+        query.setParameter("titolo", titolo);
+        return query.getResultList();
+
+    } catch (Exception e) {
+        if (entityManager != null && entityManager.getTransaction().isActive()) {
+            entityManager.getTransaction().rollback();
+        }
+        throw e;
+    } finally {
+        if (entityManager != null && entityManager.isOpen()) {
+            entityManager.close();
+        }
+    }
+}
 	}
 

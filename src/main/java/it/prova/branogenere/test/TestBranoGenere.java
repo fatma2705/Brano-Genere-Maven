@@ -152,12 +152,25 @@ public class TestBranoGenere {
    	 System.out.println(" -----------------------Test Brani con lunghezza più ----------------");
 
         try {
-        	branoInstance.ListaBraniConpiuDinCaratteri(n);
+        	branoInstance.listaBraniConGeneriConDescrizionePiuDiNCaratteri(n);
         	System.out.println(" ------------------------------Fine Test  Brani con lunghezza più--------------------------------------");
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    
+    public static void  estraiListaDescrizioneGenereAssociateAdUnBrano(BranoService branoInstance , String titolo) { {
+      	 System.out.println(" -----------------------Test Stampa generi del brano inserito ----------------");
+
+           try {
+           	branoInstance.estraiListaDescrizioneGenereAssociateAdUnBrano(titolo);
+           	System.out.println(" ------------------------------Fine Test  Stampa generi del brano inserito--------------------------------------");
+
+           } catch (Exception e) {
+               e.printStackTrace();
+           }
+       }
     }
 }
 

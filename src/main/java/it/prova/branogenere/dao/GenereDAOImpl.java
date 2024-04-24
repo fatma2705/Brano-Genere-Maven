@@ -22,7 +22,7 @@ public class GenereDAOImpl implements GenereDAO {
 	public List<Genere> getAll() throws Exception {
 		try {
 			entityManager = EntityManagerUtil.getEntityManager();
-			return entityManager.createQuery("from Genere", Genere.class).getResultList();
+			return entityManager.createQuery("SELECT DISTINCT g FROM Genere g JOIN FETCH g.brani ", Genere.class).getResultList();
 		} finally {
 			if (entityManager != null) {
 				entityManager.close();
@@ -156,32 +156,16 @@ public class GenereDAOImpl implements GenereDAO {
 	    
 	    try {
 	        entityManager = EntityManagerUtil.getEntityManager();
-	        entityManager.getTransaction().begin();
 
 	        Query query = entityManager.createNativeQuery(
-	                "SELECT b.id FROM Brano b WHERE YEAR(b.data_pubblicazione) > :primaData AND YEAR(b.data_pubblicazione) < :secondaData");
+	                "SELECT  g.* "
+	                + " FROM genere g "
+	                + " INNER JOIN  brano_genere bg ON g.id = bg.id_genere "
+	                + " INNER JOIN brano b ON bg.id_brano = b.id "
+	                + " WHERE YEAR(data_pubblicazione) >:primaData AND YEAR(data_pubblicazione) <:secondaData ",Genere.class);
 	        query.setParameter("primaData", primaData);
 	        query.setParameter("secondaData", secondaData);
-	        List<Long> branoIds = query.getResultList();
-
-	        if (branoIds.isEmpty()) {
-	            System.out.println("Non ci sono brani nel DB pubblicati in quel periodo");
-	        }
-
-	        List<Genere> generi = new ArrayList<>();
-	        for (Long branoId : branoIds) {
-	            Query secondaQuery = entityManager.createNativeQuery("SELECT id_genere FROM brano_genere WHERE id_brano = :id");
-	            secondaQuery.setParameter("id", branoId);
-	            List<Long> genereIds = secondaQuery.getResultList();
-
-	            for (Long genereId : genereIds) {
-	                Genere genere = entityManager.find(Genere.class, genereId);
-	                generi.add(genere);
-	            }
-	        }
-
-	        entityManager.getTransaction().commit();
-	        return generi;
+	        return query.getResultList();
 	    } catch (Exception e) {
 	        if (entityManager != null && entityManager.getTransaction().isActive()) {
 	            entityManager.getTransaction().rollback();

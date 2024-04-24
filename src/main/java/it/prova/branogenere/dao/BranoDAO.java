@@ -9,7 +9,9 @@ public interface BranoDAO extends IBaseDAO<Brano> {
 	
 	public void insertGenere(Brano brano,Genere genere) throws Exception;
 	
-	public List<Brano> ListaBraniConpiuDinCaratteri(int n) throws Exception;
+	public List<Brano> listaBraniConGeneriConDescrizionePiuDiNCaratteri(int n) throws Exception;
+	
+	public List<Genere> estraiListaDescrizioneGenereAssociateAdUnBrano(String titolo) throws Exception;
 	
 
 }

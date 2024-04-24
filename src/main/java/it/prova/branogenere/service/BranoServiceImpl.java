@@ -33,10 +33,6 @@ public class BranoServiceImpl implements BranoService {
 		entityManager = EntityManagerUtil.getEntityManager();
 		try {
 			branoDaoInstance.setEntityManager(entityManager);
-			if (branoDaoInstance.getAll().isEmpty()) {
-				System.out.println("Database vuoto nulla da stampare");
-				System.exit(0);
-			}
 			return branoDaoInstance.getAll();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -202,7 +198,7 @@ public class BranoServiceImpl implements BranoService {
 	}
 
 	@Override
-	public void ListaBraniConpiuDinCaratteri(int n) throws Exception {
+	public void listaBraniConGeneriConDescrizionePiuDiNCaratteri(int n) throws Exception {
 		entityManager = EntityManagerUtil.getEntityManager();
 		try {
 			if (n ==  0 ) {
@@ -211,9 +207,9 @@ public class BranoServiceImpl implements BranoService {
 			}
 			entityManager.getTransaction().begin();
 
-			genereDaoInstance.setEntityManager(entityManager);
+			branoDaoInstance.setEntityManager(entityManager);
 			System.out.println("I brani con generi con descrizione più di  " + n + " sono \n");
-			System.out.println(branoDaoInstance.ListaBraniConpiuDinCaratteri(n));
+			System.out.println(branoDaoInstance.listaBraniConGeneriConDescrizionePiuDiNCaratteri(n));
 			entityManager.getTransaction().commit();
 		} catch (Exception e) {
 			entityManager.getTransaction().rollback();
@@ -224,6 +220,31 @@ public class BranoServiceImpl implements BranoService {
 		}
 
 	}
+
+	@Override
+	public void estraiListaDescrizioneGenereAssociateAdUnBrano(String titolo) throws Exception {
+		entityManager = EntityManagerUtil.getEntityManager();
+		try {
+			if (titolo ==  "" ) {
+				System.out.println("ERRORE: titolo brano non inserito");
+				System.exit(0);
+			}
+			entityManager.getTransaction().begin();
+
+			branoDaoInstance.setEntityManager(entityManager);
+			System.out.println("I generi del brano con titolo  " + titolo + " sono \n");
+			System.out.println(branoDaoInstance.estraiListaDescrizioneGenereAssociateAdUnBrano(titolo));
+			entityManager.getTransaction().commit();
+		} catch (Exception e) {
+			entityManager.getTransaction().rollback();
+			e.printStackTrace();
+			throw e;
+		} finally {
+			EntityManagerUtil.closeEntityManager(entityManager);
+		}
+
+	}
+
 	}
 
 	
