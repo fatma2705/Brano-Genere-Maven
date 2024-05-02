@@ -79,22 +79,24 @@ public class BranoServiceImpl implements BranoService {
 				System.exit(0);
 			}
 			entityManager.getTransaction().begin();
+			branoDaoInstance.setEntityManager(entityManager);
+			genereDaoInstance.setEntityManager(entityManager);
 
 			if (branoDaoInstance.exist(branoInstance)) {
 				System.out.println("ERRORE: già esiste un brano con gli stessi dati");
 				System.exit(0);
 			}
+			branoDaoInstance.setEntityManager(entityManager);
 			branoDaoInstance.insert(branoInstance);
 			for (String descrizione : listaGeneri) {
 				if (genereDaoInstance.getBy(descrizione) == null) {
 					Genere genere = new Genere(null, descrizione);
 					genereDaoInstance.insert(genere);
-					branoDaoInstance.setEntityManager(entityManager);
+					
 					branoDaoInstance.insertGenere(branoInstance, genere);
 				} else {
-					branoDaoInstance.setEntityManager(entityManager);
 					branoDaoInstance.insertGenere(branoInstance, genereDaoInstance.getBy(descrizione));
-					System.out.println("Pizza inserita con successo");
+					System.out.println("genere inserito con successo");
 				}
 			}
 
@@ -158,10 +160,12 @@ public class BranoServiceImpl implements BranoService {
 				System.out.println("ERRORE: Non esiste un brano con questi dati ");
 				System.exit(0);
 			}
+			
 			// delete relazione tra brano e genere
 			branoDaoInstance.deleteBranoGenereAssociazione(branoInstance);
 			System.out.println("relazione tra brano e genere rimossa");
 			// update del brano
+			branoDaoInstance.setEntityManager(entityManager);
 			branoDaoInstance.update(branoInstance);
 			System.out.println("brano aggiornta");
 			// ciclo che itera dentro la lista descrizioni fornita dall'utente
