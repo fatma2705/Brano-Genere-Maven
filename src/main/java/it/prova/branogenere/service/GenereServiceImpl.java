@@ -31,11 +31,12 @@ public class GenereServiceImpl implements GenereService {
 		entityManager = EntityManagerUtil.getEntityManager();
 		try {
 			genereDaoInstance.setEntityManager(entityManager);
-			if (genereDaoInstance.getAll().isEmpty()) {
+			List<Genere> generi = genereDaoInstance.getAll();
+			if (generi.isEmpty()) {
 				System.out.println("Database vuoto nulla da stampare");
 				System.exit(0);
 			}
-			return genereDaoInstance.getAll();
+			return generi;
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
@@ -53,10 +54,6 @@ public class GenereServiceImpl implements GenereService {
 				System.exit(0);
 			}
 			genereDaoInstance.setEntityManager(entityManager);
-			if (genereDaoInstance.getElement(id) == null) {
-				System.out.println("Non esiste un genre con questo id");
-				System.exit(0);
-			}
 			return genereDaoInstance.getElement(id);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -79,7 +76,7 @@ public class GenereServiceImpl implements GenereService {
 				System.exit(0);
 			}
 			entityManager.getTransaction().begin();
-
+			genereDaoInstance.setEntityManager(entityManager);
 			if (genereDaoInstance.exist(genereInstance)) {
 				System.out.println("ERRORE: già esiste questo tipo di genere");
 				System.exit(0);
@@ -147,8 +144,8 @@ public class GenereServiceImpl implements GenereService {
 				System.exit(0);
 			}
 			genereDaoInstance.update(genereInstance);
-			System.out.println(" genere aggiornato con succcesso");
 			entityManager.getTransaction().commit();
+			System.out.println(" genere aggiornato con succcesso");
 		} catch (Exception e) {
 			entityManager.getTransaction().rollback();
 			e.printStackTrace();
@@ -163,14 +160,14 @@ public class GenereServiceImpl implements GenereService {
 	public void listaGeneriDiBraniPubblicatiTra(int primaData, int secondaData) throws Exception {
 		entityManager = EntityManagerUtil.getEntityManager();
 		try {
-			if (primaData == 0 || secondaData == 0 ) {
+			if (primaData == 0 || secondaData == 0) {
 				System.out.println("ERRORE: date non inserite");
 				System.exit(0);
 			}
 			entityManager.getTransaction().begin();
-
 			genereDaoInstance.setEntityManager(entityManager);
-			System.out.println("I generi dei brani pubblicati tra l'anno " + primaData + " e l'anno " + secondaData + " sono \n");
+			System.out.println(
+					"I generi dei brani pubblicati tra l'anno " + primaData + " e l'anno " + secondaData + " sono \n");
 			System.out.println(genereDaoInstance.listaGeneriDiBraniPubblicatiTra(primaData, secondaData));
 			entityManager.getTransaction().commit();
 		} catch (Exception e) {

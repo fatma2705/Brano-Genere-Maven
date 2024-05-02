@@ -14,8 +14,7 @@ public class BranoServiceImpl implements BranoService {
 	private BranoDAO branoDaoInstance;
 	private GenereDAO genereDaoInstance;
 	EntityManager entityManager;
-	
-	
+
 	@Override
 	public void setBranoDAO(BranoDAO branoDaoInstance) throws Exception {
 		this.branoDaoInstance = branoDaoInstance;
@@ -52,10 +51,6 @@ public class BranoServiceImpl implements BranoService {
 				System.exit(0);
 			}
 			branoDaoInstance.setEntityManager(entityManager);
-			if (branoDaoInstance.getElement(id) == null) {
-				System.out.println("Non esiste un brano con questo id");
-				System.exit(0);
-			}
 			return branoDaoInstance.getElement(id);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -92,7 +87,7 @@ public class BranoServiceImpl implements BranoService {
 				if (genereDaoInstance.getBy(descrizione) == null) {
 					Genere genere = new Genere(null, descrizione);
 					genereDaoInstance.insert(genere);
-					
+
 					branoDaoInstance.insertGenere(branoInstance, genere);
 				} else {
 					branoDaoInstance.insertGenere(branoInstance, genereDaoInstance.getBy(descrizione));
@@ -160,7 +155,7 @@ public class BranoServiceImpl implements BranoService {
 				System.out.println("ERRORE: Non esiste un brano con questi dati ");
 				System.exit(0);
 			}
-			
+
 			// delete relazione tra brano e genere
 			branoDaoInstance.deleteBranoGenereAssociazione(branoInstance);
 			System.out.println("relazione tra brano e genere rimossa");
@@ -205,7 +200,7 @@ public class BranoServiceImpl implements BranoService {
 	public void listaBraniConGeneriConDescrizionePiuDiNCaratteri(int n) throws Exception {
 		entityManager = EntityManagerUtil.getEntityManager();
 		try {
-			if (n ==  0 ) {
+			if (n == 0) {
 				System.out.println("ERRORE: lunghezza desiderata non inserita");
 				System.exit(0);
 			}
@@ -229,7 +224,7 @@ public class BranoServiceImpl implements BranoService {
 	public void estraiListaDescrizioneGenereAssociateAdUnBrano(String titolo) throws Exception {
 		entityManager = EntityManagerUtil.getEntityManager();
 		try {
-			if (titolo ==  "" ) {
+			if (titolo == "") {
 				System.out.println("ERRORE: titolo brano non inserito");
 				System.exit(0);
 			}
@@ -249,8 +244,4 @@ public class BranoServiceImpl implements BranoService {
 
 	}
 
-	}
-
-	
-
-
+}

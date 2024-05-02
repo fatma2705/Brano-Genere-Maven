@@ -31,8 +31,6 @@ public class Brano {
 	@Column(name = "data_pubblicazione")
 	private LocalDate dataPubblicazione;
 
-	
-	
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "brano_genere", joinColumns = @JoinColumn(name = "id_brano"), inverseJoinColumns = @JoinColumn(name = "id_genere"))
 	private Set<Genere> generi = new HashSet<>();
@@ -83,9 +81,8 @@ public class Brano {
 	public void setDataPubblicazione(LocalDate dataPubblicazione) {
 		this.dataPubblicazione = dataPubblicazione;
 	}
-	
-	
-	public Set<Genere> getGeneri(){
+
+	public Set<Genere> getGeneri() {
 		return generi;
 	}
 

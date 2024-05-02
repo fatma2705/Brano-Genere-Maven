@@ -55,7 +55,7 @@ public class Genere {
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
 	}
-	
+
 	public Set<Brano> getBrani() {
 		return brani;
 	}

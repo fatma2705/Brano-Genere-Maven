@@ -224,7 +224,7 @@ public class TestInterfacciaUtente {
 					System.out.println("ERRORE : non è  stata inserita una stringa ");
 					System.exit(0);
 				}
-				Genere genere = new Genere(null,descrizione);
+				Genere genere = new Genere(null, descrizione);
 				TestBranoGenere.inserisciGenere(genereServiceInstance, genere);
 				break;
 
@@ -266,10 +266,10 @@ public class TestInterfacciaUtente {
 					System.out.println("ERRORE : non è  stata inserita una stringa ");
 					System.exit(0);
 				}
-				
-				Genere genereG = new Genere(idG,descrizioneG);
+
+				Genere genereG = new Genere(idG, descrizioneG);
 				TestBranoGenere.aggiornaGenere(genereServiceInstance, genereG);
-				break; 
+				break;
 			case 10:
 				System.out.println("Hai scelto di eliminare un genere");
 				System.out.println("Inserisci L'id del genere da eliminare:");
@@ -323,8 +323,9 @@ public class TestInterfacciaUtente {
 					System.out.println("ERRORE : non è  stata inserita una stringa ");
 					System.exit(0);
 				}
-				TestBranoGenere.estraiListaDescrizioneGenereAssociateAdUnBrano(branoServiceInstance, titoloT);;
-				
+				TestBranoGenere.estraiListaDescrizioneGenereAssociateAdUnBrano(branoServiceInstance, titoloT);
+				;
+
 			case 14:
 				exit = true;
 				break;
